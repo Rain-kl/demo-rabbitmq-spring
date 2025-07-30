@@ -31,5 +31,6 @@ public class MqListener {
     )
     public void receiveMessage2(String message) {
         System.err.println("C2-Received message: " + message);
+        throw new RuntimeException(message);
     }
 }

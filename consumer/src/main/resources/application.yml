@@ -9,6 +9,10 @@ spring:
       simple:
         prefetch: 1  #能者多劳，消费者每次只消费一条消息
         acknowledge-mode: auto  #自动确认消息, 如果消费者处理失败, 返回 NACK
+        retry:
+          enabled: true     #开启重试机制
+          max-attempts: 3   #最大重试次数
+
     connection-timeout: 10000  #连接超时时间
     template:
       retry:
