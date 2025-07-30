@@ -8,3 +8,9 @@ spring:
     listener:
       simple:
         prefetch: 1  #能者多劳，消费者每次只消费一条消息
+    connection-timeout: 10000  #连接超时时间
+    template:
+      retry:
+        enabled: true
+        initial-interval: 1000ms  #初始重试间隔
+        multiplier: 1  #重试间隔倍数
