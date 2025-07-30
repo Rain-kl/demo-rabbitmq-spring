@@ -5,3 +5,5 @@ spring:
     virtual-host: /
     username: root
     password: root
+    publisher-confirm-type: correlated  #生产者确认模式(部分场景考虑开启)
+    publisher-returns: true  #确保消息在交换机被正确路由(不建议开启, 推荐使用备用交换机)
