@@ -6,6 +6,9 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @SpringBootTest
 class PublisherApplicationTests {
 
@@ -62,7 +65,15 @@ class PublisherApplicationTests {
         String exchange = "hello.direct";
         rabbitTemplate.convertAndSend(exchange, "a", "Key A Message", cd);
         Thread.sleep(50);
+    }
 
+    @Test
+    void testSendObject() {
+        String exchange = "object.fanout";
+        Map<String, Object> map = new HashMap<>();
+        map.put("a", "a");
+        map.put("b", "b");
+        rabbitTemplate.convertAndSend(exchange, "c", map);
 
     }
 }

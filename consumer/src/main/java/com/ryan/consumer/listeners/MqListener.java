@@ -7,6 +7,8 @@ import org.springframework.amqp.rabbit.annotation.QueueBinding;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
+import java.util.Map;
+
 @Component
 public class MqListener {
 
@@ -31,6 +33,17 @@ public class MqListener {
     )
     public void receiveMessage2(String message) {
         System.err.println("C2-Received message: " + message);
-        throw new RuntimeException(message);
+//        throw new RuntimeException(message);
+    }
+
+    @RabbitListener(
+            bindings = @QueueBinding(
+                    value = @Queue(name = "object.queue2", durable = "true"),
+                    exchange = @Exchange(name = "object.fanout", type = ExchangeTypes.FANOUT)
+            )
+    )
+    public void receiveObject(Map<String, Object> message) {
+        System.out.println("Object-Received message: " + message);
+//        throw new RuntimeException(message);
     }
 }
