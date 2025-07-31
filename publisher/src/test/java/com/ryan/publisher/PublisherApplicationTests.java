@@ -27,7 +27,7 @@ class PublisherApplicationTests {
 
     @Test
     void sendToFanout() {
-        String exchange = "hello.fanout";
+        String exchange = "delayed.fanout";
         String message = "Hello World to Exchange";
         for (int i = 0; i < 50; i++) {
             rabbitTemplate.convertAndSend(exchange, "", message + " " + i);
@@ -69,7 +69,7 @@ class PublisherApplicationTests {
 
     @Test
     void testSendObject() {
-        String exchange = "object.fanout";
+        String exchange = "delayed.fanout";
         Map<String, Object> map = new HashMap<>();
         map.put("a", "a");
         map.put("b", "b");
