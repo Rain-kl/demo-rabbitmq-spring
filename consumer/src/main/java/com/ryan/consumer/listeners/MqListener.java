@@ -12,6 +12,18 @@ import java.util.Map;
 @Component
 public class MqListener {
 
+
+    /**
+     * 如果 exchange-queue 绑定关系存在, 则可以直接监听队列
+     * 代表情况是使用 config 配置了绑定关系
+     *
+     * @param message
+     */
+    @RabbitListener(queues = "hello.queue1")
+    public void receiveMessageSimple(String message) {
+        System.out.println("C1-Received message: " + message);
+    }
+
     @RabbitListener(
             bindings = @QueueBinding(
                     value = @Queue(name = "hello.queue1", durable = "true"),

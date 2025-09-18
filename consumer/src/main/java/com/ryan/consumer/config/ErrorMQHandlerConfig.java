@@ -37,6 +37,15 @@ public class ErrorMQHandlerConfig {
                 .with("error");
     }
 
+
+    /**
+     *
+     * 配置消息恢复器，当消息处理失败且重试次数耗尽后，将消息重新发布到错误队列。
+     *
+     * @param rabbitTemplate RabbitMQ模板，用于重新发布消息
+     * @return MessageRecoverer 消息恢复器实例
+     * @return
+     */
     @Bean
     public MessageRecoverer messageRecoverer(RabbitTemplate rabbitTemplate) {
         return new RepublishMessageRecoverer(rabbitTemplate,
